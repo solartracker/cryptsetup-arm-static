@@ -1749,11 +1749,10 @@ if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
     unpack_archive "${PKG_SOURCE}" "${PKG_SOURCE_SUBDIR}"
     cd "${PKG_SOURCE_SUBDIR}"
 
-    export PREFIX=
     export ENABLE_SHARED=0
 
     $MAKE
-    make install DESTDIR="${SYSROOT}"
+    make install
 
     touch __package_installed
 fi
@@ -1781,8 +1780,6 @@ if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
 
     apply_patches "${SCRIPT_DIR}/patches/lvm2/lvm2-2.03.38/solartracker" "."
 
-    export PREFIX=
-
     ./configure \
         --prefix="${PREFIX}" \
         --host="${HOST}" \
@@ -1799,7 +1796,7 @@ if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
     || handle_configure_error $?
 
     $MAKE
-    make install DESTDIR="${SYSROOT}"
+    make install
 
     touch __package_installed
 fi
@@ -1825,11 +1822,8 @@ if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
     unpack_archive "${PKG_SOURCE}" "${PKG_SOURCE_SUBDIR}"
     cd "${PKG_SOURCE_SUBDIR}"
 
-    export PREFIX=
-    #export LDFLAGS="-static ${LDFLAGS}"
-
     $MAKE
-    make install DESTDIR="${SYSROOT}"
+    make install
 
     touch __package_installed
 fi
@@ -2036,7 +2030,6 @@ if [ ! -f "${PKG_BUILD_SUBDIR}/__package_installed" ]; then
     mkdir "${PKG_BUILD_SUBDIR}"
     cd "${PKG_BUILD_SUBDIR}"
 
-    export PREFIX=
     export LDFLAGS="-L${STAGE_DIR}/lib ${LDFLAGS}"
     export CPPFLAGS="-I${STAGE_DIR}/include ${CPPFLAGS}"
     export LIBS="-lgcrypt -lgpg-error -ldevmapper -luuid -largon2 -ljson-c -lblkid -lpopt -lpthread -ldl -lm -largp"
@@ -2058,7 +2051,7 @@ if [ ! -f "${PKG_BUILD_SUBDIR}/__package_installed" ]; then
     || handle_configure_error $?
 
     $MAKE
-    make install DESTDIR="${SYSROOT}"
+    make install
 
     touch __package_installed
 fi
