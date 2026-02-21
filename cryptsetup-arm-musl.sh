@@ -1792,6 +1792,10 @@ if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
         --disable-dependency-tracking \
         --disable-nls \
         --with-default-locking-dir=/tmp/lvm \
+        ac_cv_func_malloc_0_nonnull=yes \
+        ac_cv_func_realloc_0_nonnull=yes \
+        ac_cv_func_malloc_works=yes \
+        ac_cv_func_realloc_works=yes \
     || handle_configure_error $?
 
     $MAKE
