@@ -1752,7 +1752,7 @@ if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
     export ENABLE_SHARED=0
 
     $MAKE
-    make install
+    make install DESTDIR="${PREFIX}"
 
     touch __package_installed
 fi
@@ -1796,7 +1796,7 @@ if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
     || handle_configure_error $?
 
     $MAKE
-    make install
+    make install DESTDIR="${PREFIX}"
 
     touch __package_installed
 fi
@@ -2032,7 +2032,7 @@ if [ ! -f "${PKG_BUILD_SUBDIR}/__package_installed" ]; then
 
     export LDFLAGS="-L${STAGE_DIR}/lib ${LDFLAGS}"
     export CPPFLAGS="-I${STAGE_DIR}/include ${CPPFLAGS}"
-    export LIBS="-lgcrypt -lgpg-error -ldevmapper -luuid -largon2 -ljson-c -lblkid -lpopt -lpthread -ldl -lm -largp"
+    export LIBS="-lgcrypt -lgpg-error -ldevmapper -luuid -largon2 -ljson-c -lblkid -lpopt -lpthread -ldl -lm -largp -lz"
 
     ../${PKG_SOURCE_SUBDIR}/configure \
         --prefix="${PREFIX}" \
