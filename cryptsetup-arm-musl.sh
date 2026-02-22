@@ -95,15 +95,14 @@ create_install_package() {
 echo ""
 echo "[*] Creating install package..."
 rm -rf "${PACKAGER_ROOT}"
-exit 1
 mkdir -p "${PACKAGER_TOPDIR}/sbin"
 mkdir -p "${PACKAGER_TOPDIR}/share/man/man8"
-cp -p "${PREFIX}/sbin/cryptsetup.static" "${PACKAGER_TOPDIR}/sbin/"
-cp -p "${PREFIX}/sbin/veritysetup.static" "${PACKAGER_TOPDIR}/sbin/"
-cp -p "${PREFIX}/sbin/integritysetup.static" "${PACKAGER_TOPDIR}/sbin/"
+cp -p "${PREFIX}/sbin/cryptsetup" "${PACKAGER_TOPDIR}/sbin/"
+cp -p "${PREFIX}/sbin/veritysetup" "${PACKAGER_TOPDIR}/sbin/"
+cp -p "${PREFIX}/sbin/integritysetup" "${PACKAGER_TOPDIR}/sbin/"
 cp -p "${PREFIX}/sbin/cryptsetup-ssh" "${PACKAGER_TOPDIR}/sbin/"
 cp -p "${PREFIX}/share/man/man8/cryptsetup"* "${PACKAGER_TOPDIR}/share/man/man8/"
-add_items_to_install_package "${PREFIX}/sbin/cryptsetup.static"
+add_items_to_install_package "${PREFIX}/sbin/cryptsetup"
 
 return 0
 } #END create_install_package()
@@ -2015,15 +2014,14 @@ if [ ! -f "${PKG_BUILD_SUBDIR}/__package_installed" ]; then
     mkdir "${PKG_BUILD_SUBDIR}"
     cd "${PKG_BUILD_SUBDIR}"
 
-    export LDFLAGS="-L${STAGE_DIR}/lib ${LDFLAGS}"
     export CPPFLAGS="-I${STAGE_DIR}/include ${CPPFLAGS}"
+    export LDFLAGS="-static -L${STAGE_DIR}/lib ${LDFLAGS}"
     export LIBS="-lgcrypt -lgpg-error -ldevmapper -luuid -largon2 -ljson-c -lblkid -lpopt -lpthread -ldl -lm -largp -lz"
 
     ../${PKG_SOURCE_SUBDIR}/configure \
         --prefix="${PREFIX}" \
         --host="${HOST}" \
         --build="${SYSTEM}" \
-        --enable-static-cryptsetup \
         --enable-static \
         --disable-shared \
         --disable-dependency-tracking \
@@ -2035,7 +2033,7 @@ if [ ! -f "${PKG_BUILD_SUBDIR}/__package_installed" ]; then
         --with-crypto_backend=gcrypt \
     || handle_configure_error $?
 
-    $MAKE
+    $MAKE LDFLAGS="-all-static ${LDFLAGS}"
     make install
 
     touch __package_installed
