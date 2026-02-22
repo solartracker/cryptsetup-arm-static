@@ -1,0 +1,36 @@
+diff -ruN a/src/Makefile.am b/src/Makefile.am
+--- a/src/Makefile.am	2025-05-02 08:49:29.000000000 -0400
++++ b/src/Makefile.am	2026-02-22 16:33:08.207296723 -0500
+@@ -196,12 +196,12 @@
+ all-am: apropos$(EXEEXT)
+ 
+ install-exec-hook:
+-	if [ "$(man_owner)" ] && [ "$(man_mode)" = 6755 ]; then \
++	if false; then \
+ 		chown $(man_owner):$(man_owner) \
+ 			$(DESTDIR)$(bindir)/$(TRANS_MAN)$(EXEEXT) \
+ 			$(DESTDIR)$(bindir)/$(TRANS_MANDB)$(EXEEXT); \
+ 	fi
+-	chmod $(man_mode) \
++	chmod 0755 \
+ 		$(DESTDIR)$(bindir)/$(TRANS_MAN)$(EXEEXT) \
+ 		$(DESTDIR)$(bindir)/$(TRANS_MANDB)$(EXEEXT)
+ 	cd $(DESTDIR)$(bindir) && rm -f $(TRANS_APROPOS)$(EXEEXT) && \
+diff -ruN a/src/Makefile.in b/src/Makefile.in
+--- a/src/Makefile.in	2025-05-02 08:53:52.000000000 -0400
++++ b/src/Makefile.in	2026-02-22 16:33:32.607096123 -0500
+@@ -2965,12 +2965,12 @@
+ all-am: apropos$(EXEEXT)
+ 
+ install-exec-hook:
+-	if [ "$(man_owner)" ] && [ "$(man_mode)" = 6755 ]; then \
++	if false; then \
+ 		chown $(man_owner):$(man_owner) \
+ 			$(DESTDIR)$(bindir)/$(TRANS_MAN)$(EXEEXT) \
+ 			$(DESTDIR)$(bindir)/$(TRANS_MANDB)$(EXEEXT); \
+ 	fi
+-	chmod $(man_mode) \
++	chmod 0755 \
+ 		$(DESTDIR)$(bindir)/$(TRANS_MAN)$(EXEEXT) \
+ 		$(DESTDIR)$(bindir)/$(TRANS_MANDB)$(EXEEXT)
+ 	cd $(DESTDIR)$(bindir) && rm -f $(TRANS_APROPOS)$(EXEEXT) && \
