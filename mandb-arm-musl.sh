@@ -1480,6 +1480,7 @@ if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
 
     export LDFLAGS="-static ${LDFLAGS}"
 
+    hide_shared_libraries
     ./configure \
         --prefix="${PREFIX}" \
         --host="${HOST}" \
@@ -1491,10 +1492,9 @@ if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
         --disable-rpath \
     || handle_configure_error $?
 
-    export LDFLAGS="-all-static ${LDFLAGS}"
-
     $MAKE
     make install
+    restore_shared_libraries
 
     # strip and verify there are no dependencies for static build
     finalize_build "${PREFIX}/bin/gdbmtool" \
