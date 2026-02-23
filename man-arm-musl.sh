@@ -96,10 +96,94 @@ echo ""
 echo "[*] Creating install package..."
 rm -rf "${PACKAGER_ROOT}"
 mkdir -p "${PACKAGER_TOPDIR}/bin"
-cp -p "${PREFIX}/bin/man" "${PACKAGER_TOPDIR}/bin/"
-cp -p "${PREFIX}/bin/less" "${PACKAGER_TOPDIR}/bin/"
-cp -p "${PREFIX}/bin/groff" "${PACKAGER_TOPDIR}/bin/"
-add_items_to_install_package "${PREFIX}/sbin/cryptsetup"
+mkdir -p "${PACKAGER_TOPDIR}/sbin"
+mkdir -p "${PACKAGER_TOPDIR}/etc"
+mkdir -p "${PACKAGER_TOPDIR}/lib/groff"
+mkdir -p "${PACKAGER_TOPDIR}/lib/systemd/system"
+mkdir -p "${PACKAGER_TOPDIR}/libexec/man-db"
+mkdir -p "${PACKAGER_TOPDIR}/usr/lib/tmpfiles.d"
+mkdir -p "${PACKAGER_TOPDIR}/share"
+# ncurses
+cp -a "${PREFIX}/bin/tic" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/toe" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/infotocap" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/captoinfo" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/infocmp" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/clear" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/tabs" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/tput" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/tset" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/reset" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/ncursesw6-config" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/lib/terminfo" "${PACKAGER_TOPDIR}/lib/"
+cp -a "${PREFIX}/share/tabset" "${PACKAGER_TOPDIR}/share/"
+cp -a "${PREFIX}/share/terminfo" "${PACKAGER_TOPDIR}/share/"
+# less
+cp -a "${PREFIX}/bin/less" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/lesskey" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/lessecho" "${PACKAGER_TOPDIR}/bin/"
+# groff
+cp -a "${PREFIX}/bin/grodvi" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/post-grohtml" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/grops" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/grolj4" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/grolbp" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/pre-grohtml" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/preconv" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/grotty" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/groff" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/addftinfo" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/tfmtodit" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/pfbtops" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/lkbib" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/hpftodit" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/pic2graph" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/pdfroff" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/pdfmom" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/mmroff" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/gropdf" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/grog" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/grap2graph" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/gpinyin" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/gperl" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/glilypond" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/gdiffmk" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/eqn2graph" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/afmtodit" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/eqn" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/soelim" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/refer" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/pic" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/grn" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/troff" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/tbl" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/indxbib" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/lookbib" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/nroff" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/neqn" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/chem" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/lib/groff/site-tmac" "${PACKAGER_TOPDIR}/lib/groff/"
+cp -a "${PREFIX}/share/doc" "${PACKAGER_TOPDIR}/share/"
+cp -a "${PREFIX}/share/groff" "${PACKAGER_TOPDIR}/share/"
+# gdbm
+cp -a "${PREFIX}/bin/gdbmtool" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/gdbm_load" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/gdbm_dump" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/share/info" "${PACKAGER_TOPDIR}/share/"
+# man-db
+cp -a "${PREFIX}/bin/man" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/man-recode" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/mandb" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/manpath" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/whatis" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/apropos" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/catman" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/lexgrog" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/sbin/accessdb" "${PACKAGER_TOPDIR}/sbin/"
+cp -a "${PREFIX}/lib/systemd/system/man-db.service" "${PACKAGER_TOPDIR}/lib/systemd/system/"
+cp -a "${PREFIX}/lib/systemd/system/man-db.timer" "${PACKAGER_TOPDIR}/lib/systemd/system/"
+cp -a "${PREFIX}/share/man" "${PACKAGER_TOPDIR}/share/"
+add_items_to_install_package "${PREFIX}/bin/man"
 
 return 0
 } #END create_install_package()
@@ -1259,7 +1343,7 @@ if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
     unpack_archive "${PKG_SOURCE}" "${PKG_SOURCE_SUBDIR}"
     cd "${PKG_SOURCE_SUBDIR}"
 
-    #export LDFLAGS="-static ${LDFLAGS}"
+    export LDFLAGS="-static ${LDFLAGS}"
 
     ./configure \
         --prefix="${PREFIX}" \
@@ -1267,7 +1351,6 @@ if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
         --build="${SYSTEM}" \
     || handle_configure_error $?
 
-    #$MAKE LDFLAGS="-all-static ${LDFLAGS}"
     $MAKE
     make install
 
@@ -1304,7 +1387,7 @@ if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
         --enable-year2038 \
     || handle_configure_error $?
 
-    $MAKE LDFLAGS="-all-static ${LDFLAGS}"
+    $MAKE
     make install
 
     touch __package_installed
@@ -1341,7 +1424,7 @@ if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
         --disable-rpath \
     || handle_configure_error $?
 
-    $MAKE LDFLAGS="-all-static ${LDFLAGS}"
+    $MAKE
     make install
 
     touch __package_installed
@@ -1367,6 +1450,8 @@ if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
     verify_hash "${PKG_SOURCE}" "${PKG_HASH}"
     unpack_archive "${PKG_SOURCE}" "${PKG_SOURCE_SUBDIR}"
     cd "${PKG_SOURCE_SUBDIR}"
+
+    export LDFLAGS="-static ${LDFLAGS}"
 
     ./configure \
         --prefix="${PREFIX}" \
