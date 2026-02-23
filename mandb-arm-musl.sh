@@ -1133,7 +1133,7 @@ check_static() {
 
 finalize_build()
 ( # BEGIN sub-shell
-    #set +x
+    set +x
     echo ""
     echo "Stripping symbols and sections from files..."
     ${STRIP} -v "$@"
