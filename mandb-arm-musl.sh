@@ -1116,6 +1116,9 @@ check_static() {
         if ${READELF} -d "${bin}" 2>/dev/null | grep NEEDED; then
             rc=1
         fi || true
+        if [ -L "${bin}.static" ]; then
+          rm "${bin}.static" 2>/dev/null || true
+        fi 
         ldd "${bin}" 2>&1 || true
     done
 
@@ -1128,8 +1131,9 @@ check_static() {
     return ${rc}
 }
 
-finalize_build() {
-    set +x
+finalize_build()
+( # BEGIN sub-shell
+    #set +x
     echo ""
     echo "Stripping symbols and sections from files..."
     ${STRIP} -v "$@"
@@ -1150,10 +1154,9 @@ finalize_build() {
             *) ln -sfn "$(basename "${bin}")" "${bin}.static" ;;
         esac
     done
-    set -x
 
     return 0
-}
+) # END sub-shell
 
 # temporarily hide shared libraries (.so) to force cmake to use the static ones (.a)
 hide_shared_libraries() {
@@ -1588,11 +1591,11 @@ if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
     make install DESTDIR="${SYSROOT}"
 
     # strip and verify there are no dependencies for static build
-    finalize_build "${PREFIX}/bin/man" \
-                   "${PREFIX}/bin/man-recode" \
-                   "${PREFIX}/bin/mandb" \
-                   "${PREFIX}/bin/manpath" \
-                   "${PREFIX}/bin/whatis"
+    finalize_build "${SYSROOT}/bin/man" \
+                   "${SYSROOT}/bin/man-recode" \
+                   "${SYSROOT}/bin/mandb" \
+                   "${SYSROOT}/bin/manpath" \
+                   "${SYSROOT}/bin/whatis"
 
     touch __package_installed
 fi

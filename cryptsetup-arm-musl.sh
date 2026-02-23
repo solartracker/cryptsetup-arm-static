@@ -1035,6 +1035,9 @@ check_static() {
         if ${READELF} -d "${bin}" 2>/dev/null | grep NEEDED; then
             rc=1
         fi || true
+        if [ -L "${bin}.static" ]; then
+          rm "${bin}.static" 2>/dev/null || true
+        fi 
         ldd "${bin}" 2>&1 || true
     done
 
@@ -1047,7 +1050,8 @@ check_static() {
     return ${rc}
 }
 
-finalize_build() {
+finalize_build()
+( # BEGIN sub-shell
     set +x
     echo ""
     echo "Stripping symbols and sections from files..."
@@ -1069,10 +1073,9 @@ finalize_build() {
             *) ln -sfn "$(basename "${bin}")" "${bin}.static" ;;
         esac
     done
-    set -x
 
     return 0
-}
+) # END sub-shell
 
 # temporarily hide shared libraries (.so) to force cmake to use the static ones (.a)
 hide_shared_libraries() {
