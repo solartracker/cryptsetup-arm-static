@@ -1,6 +1,6 @@
 #!/bin/bash
 ################################################################################
-# man-arm-musl.sh
+# mandb-arm-musl.sh
 #
 # Copyright (C) 2025 Richard Elwell
 #
@@ -20,7 +20,7 @@
 ################################################################################
 
 main() {
-PKG_ROOT=man
+PKG_ROOT=mandb
 PKG_ROOT_VERSION="2.13.1"
 PKG_ROOT_RELEASE=1
 PKG_TARGET_CPU=armv7
@@ -1354,6 +1354,15 @@ if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
     $MAKE
     make install
 
+    # strip and verify there are no dependencies for static build
+    finalize_build "${PREFIX}/bin/tic" \
+                   "${PREFIX}/bin/toe" \
+                   "${PREFIX}/bin/infocmp" \
+                   "${PREFIX}/bin/clear" \
+                   "${PREFIX}/bin/tabs" \
+                   "${PREFIX}/bin/tput" \
+                   "${PREFIX}/bin/tset"
+
     touch __package_installed
 fi
 )
@@ -1389,6 +1398,11 @@ if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
 
     $MAKE
     make install
+
+    # strip and verify there are no dependencies for static build
+    finalize_build "${PREFIX}/bin/less" \
+                   "${PREFIX}/bin/lesskey" \
+                   "${PREFIX}/bin/lessecho"
 
     touch __package_installed
 fi
@@ -1427,6 +1441,19 @@ if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
     $MAKE
     make install
 
+    # strip and verify there are no dependencies for static build
+    finalize_build "${PREFIX}/bin/groff" \
+                   "${PREFIX}/bin/troff" \
+                   "${PREFIX}/bin/grotty" \
+                   "${PREFIX}/bin/pre-grohtml" \
+                   "${PREFIX}/bin/post-grohtml" \
+                   "${PREFIX}/bin/grops" \
+                   "${PREFIX}/bin/grolbp" \
+                   "${PREFIX}/bin/grodvi" \
+                   "${PREFIX}/bin/grolj4" \
+                   "${PREFIX}/bin/hpftodit" \
+                   "${PREFIX}/bin/addftinfo"
+
     touch __package_installed
 fi
 )
@@ -1464,8 +1491,15 @@ if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
         --disable-rpath \
     || handle_configure_error $?
 
+    export LDFLAGS="-all-static ${LDFLAGS}"
+
     $MAKE
     make install
+
+    # strip and verify there are no dependencies for static build
+    finalize_build "${PREFIX}/bin/gdbmtool" \
+                   "${PREFIX}/bin/gdbm_load" \
+                   "${PREFIX}/bin/gdbm_dump"
 
     touch __package_installed
 fi
@@ -1552,6 +1586,13 @@ if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
 
     $MAKE LDFLAGS="-all-static ${LDFLAGS}"
     make install DESTDIR="${SYSROOT}"
+
+    # strip and verify there are no dependencies for static build
+    finalize_build "${PREFIX}/bin/man" \
+                   "${PREFIX}/bin/man-recode" \
+                   "${PREFIX}/bin/mandb" \
+                   "${PREFIX}/bin/manpath" \
+                   "${PREFIX}/bin/whatis"
 
     touch __package_installed
 fi
