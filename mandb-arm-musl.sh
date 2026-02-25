@@ -106,6 +106,7 @@ mkdir -p "${PACKAGER_TOPDIR}/lib/systemd/system"
 mkdir -p "${PACKAGER_TOPDIR}/libexec/man-db"
 mkdir -p "${PACKAGER_TOPDIR}/usr/lib/tmpfiles.d"
 # manpages
+cp -a "${PREFIX}/etc/man_db.conf" "${PACKAGER_TOPDIR}/etc/"
 cp -a "${PREFIX}/share/man" "${PACKAGER_TOPDIR}/share/"
 # ncurses
 cp -a "${PREFIX}/bin/captoinfo" "${PACKAGER_TOPDIR}/bin/"
@@ -121,8 +122,8 @@ cp -a "${PREFIX}/bin/tput" "${PACKAGER_TOPDIR}/bin/"
 cp -a "${PREFIX}/bin/tset" "${PACKAGER_TOPDIR}/bin/"
 # less
 cp -a "${PREFIX}/bin/less" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/lesskey" "${PACKAGER_TOPDIR}/bin/"
 cp -a "${PREFIX}/bin/lessecho" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/lesskey" "${PACKAGER_TOPDIR}/bin/"
 # groff
 cp -a "${PREFIX}/bin/addftinfo" "${PACKAGER_TOPDIR}/bin/"
 cp -a "${PREFIX}/bin/afmtodit" "${PACKAGER_TOPDIR}/bin/"
