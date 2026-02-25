@@ -1497,7 +1497,7 @@ if [ ! -f "${PKG_BUILD_SUBDIR}/__package_installed" ]; then
                    "${PREFIX}/bin/pic" \
                    "${PREFIX}/bin/post-grohtml" \
                    "${PREFIX}/bin/preconv" \
-                   "${PREFIX}/bin/pre-grohtm" \
+                   "${PREFIX}/bin/pre-grohtml" \
                    "${PREFIX}/bin/refer" \
                    "${PREFIX}/bin/soelim" \
                    "${PREFIX}/bin/tbl" \
