@@ -78,6 +78,8 @@ export PKG_CONFIG="pkg-config"
 export PKG_CONFIG_LIBDIR="${PREFIX}/lib/pkgconfig"
 unset PKG_CONFIG_PATH
 
+check_dependencies
+
 install_build_environment
 
 download_and_compile
