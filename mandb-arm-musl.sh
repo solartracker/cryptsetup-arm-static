@@ -100,11 +100,13 @@ rm -rf "${PACKAGER_ROOT}"
 mkdir -p "${PACKAGER_TOPDIR}/bin"
 mkdir -p "${PACKAGER_TOPDIR}/sbin"
 mkdir -p "${PACKAGER_TOPDIR}/etc"
+mkdir -p "${PACKAGER_TOPDIR}/share"
 mkdir -p "${PACKAGER_TOPDIR}/lib/groff"
 mkdir -p "${PACKAGER_TOPDIR}/lib/systemd/system"
 mkdir -p "${PACKAGER_TOPDIR}/libexec/man-db"
 mkdir -p "${PACKAGER_TOPDIR}/usr/lib/tmpfiles.d"
-mkdir -p "${PACKAGER_TOPDIR}/share"
+# manpages
+cp -a "${PREFIX}/share/man" "${PACKAGER_TOPDIR}/share/"
 # ncurses
 cp -a "${PREFIX}/bin/captoinfo" "${PACKAGER_TOPDIR}/bin/"
 cp -a "${PREFIX}/bin/clear" "${PACKAGER_TOPDIR}/bin/"
@@ -178,7 +180,6 @@ cp -a "${PREFIX}/bin/whatis" "${PACKAGER_TOPDIR}/bin/"
 cp -a "${PREFIX}/sbin/accessdb" "${PACKAGER_TOPDIR}/sbin/"
 cp -a "${PREFIX}/lib/systemd/system/man-db.service" "${PACKAGER_TOPDIR}/lib/systemd/system/"
 cp -a "${PREFIX}/lib/systemd/system/man-db.timer" "${PACKAGER_TOPDIR}/lib/systemd/system/"
-cp -a "${PREFIX}/share/man" "${PACKAGER_TOPDIR}/share/"
 add_items_to_install_package "${PREFIX}/bin/man"
 
 return 0
