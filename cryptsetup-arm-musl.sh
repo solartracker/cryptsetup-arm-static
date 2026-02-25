@@ -98,12 +98,10 @@ echo ""
 echo "[*] Creating install package..."
 rm -rf "${PACKAGER_ROOT}"
 mkdir -p "${PACKAGER_TOPDIR}/sbin"
-mkdir -p "${PACKAGER_TOPDIR}/share/man/man8"
 cp -p "${PREFIX}/sbin/cryptsetup" "${PACKAGER_TOPDIR}/sbin/"
 cp -p "${PREFIX}/sbin/veritysetup" "${PACKAGER_TOPDIR}/sbin/"
 cp -p "${PREFIX}/sbin/integritysetup" "${PACKAGER_TOPDIR}/sbin/"
 cp -p "${PREFIX}/sbin/cryptsetup-ssh" "${PACKAGER_TOPDIR}/sbin/"
-cp -p "${PREFIX}/share/man/man8/cryptsetup"* "${PACKAGER_TOPDIR}/share/man/man8/"
 add_items_to_install_package "${PREFIX}/sbin/cryptsetup"
 
 return 0
