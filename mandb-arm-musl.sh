@@ -106,81 +106,75 @@ mkdir -p "${PACKAGER_TOPDIR}/libexec/man-db"
 mkdir -p "${PACKAGER_TOPDIR}/usr/lib/tmpfiles.d"
 mkdir -p "${PACKAGER_TOPDIR}/share"
 # ncurses
+cp -a "${PREFIX}/bin/captoinfo" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/clear" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/infocmp" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/infotocap" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/ncursesw6-config" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/reset" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/tabs" "${PACKAGER_TOPDIR}/bin/"
 cp -a "${PREFIX}/bin/tic" "${PACKAGER_TOPDIR}/bin/"
 cp -a "${PREFIX}/bin/toe" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/infotocap" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/captoinfo" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/infocmp" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/clear" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/tabs" "${PACKAGER_TOPDIR}/bin/"
 cp -a "${PREFIX}/bin/tput" "${PACKAGER_TOPDIR}/bin/"
 cp -a "${PREFIX}/bin/tset" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/reset" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/ncursesw6-config" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/lib/terminfo" "${PACKAGER_TOPDIR}/lib/"
-cp -a "${PREFIX}/share/tabset" "${PACKAGER_TOPDIR}/share/"
-cp -a "${PREFIX}/share/terminfo" "${PACKAGER_TOPDIR}/share/"
 # less
 cp -a "${PREFIX}/bin/less" "${PACKAGER_TOPDIR}/bin/"
 cp -a "${PREFIX}/bin/lesskey" "${PACKAGER_TOPDIR}/bin/"
 cp -a "${PREFIX}/bin/lessecho" "${PACKAGER_TOPDIR}/bin/"
 # groff
-cp -a "${PREFIX}/bin/grodvi" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/post-grohtml" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/grops" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/grolj4" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/grolbp" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/pre-grohtml" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/preconv" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/grotty" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/groff" "${PACKAGER_TOPDIR}/bin/"
 cp -a "${PREFIX}/bin/addftinfo" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/tfmtodit" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/pfbtops" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/lkbib" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/hpftodit" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/pic2graph" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/pdfroff" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/pdfmom" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/mmroff" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/gropdf" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/grog" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/grap2graph" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/gpinyin" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/gperl" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/glilypond" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/gdiffmk" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/eqn2graph" "${PACKAGER_TOPDIR}/bin/"
 cp -a "${PREFIX}/bin/afmtodit" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/eqn" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/soelim" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/refer" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/pic" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/grn" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/troff" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/tbl" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/indxbib" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/lookbib" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/nroff" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/neqn" "${PACKAGER_TOPDIR}/bin/"
 cp -a "${PREFIX}/bin/chem" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/lib/groff/site-tmac" "${PACKAGER_TOPDIR}/lib/groff/"
-cp -a "${PREFIX}/share/doc" "${PACKAGER_TOPDIR}/share/"
-cp -a "${PREFIX}/share/groff" "${PACKAGER_TOPDIR}/share/"
+cp -a "${PREFIX}/bin/eqn" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/eqn2graph" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/gdiffmk" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/glilypond" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/gperl" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/gpinyin" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/grap2graph" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/grn" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/grodvi" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/groff" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/grog" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/grolbp" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/grolj4" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/gropdf" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/grops" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/grotty" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/hpftodit" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/indxbib" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/lkbib" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/lookbib" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/mmroff" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/neqn" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/nroff" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/pdfmom" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/pdfroff" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/pfbtops" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/pic" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/pic2graph" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/post-grohtml" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/preconv" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/pre-grohtml" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/refer" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/soelim" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/tbl" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/tfmtodit" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/troff" "${PACKAGER_TOPDIR}/bin/"
 # gdbm
 cp -a "${PREFIX}/bin/gdbmtool" "${PACKAGER_TOPDIR}/bin/"
 cp -a "${PREFIX}/bin/gdbm_load" "${PACKAGER_TOPDIR}/bin/"
 cp -a "${PREFIX}/bin/gdbm_dump" "${PACKAGER_TOPDIR}/bin/"
 cp -a "${PREFIX}/share/info" "${PACKAGER_TOPDIR}/share/"
 # man-db
-cp -a "${PREFIX}/bin/man" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/man-recode" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/mandb" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/manpath" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/whatis" "${PACKAGER_TOPDIR}/bin/"
 cp -a "${PREFIX}/bin/apropos" "${PACKAGER_TOPDIR}/bin/"
 cp -a "${PREFIX}/bin/catman" "${PACKAGER_TOPDIR}/bin/"
 cp -a "${PREFIX}/bin/lexgrog" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/man" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/mandb" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/manpath" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/man-recode" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX}/bin/whatis" "${PACKAGER_TOPDIR}/bin/"
 cp -a "${PREFIX}/sbin/accessdb" "${PACKAGER_TOPDIR}/sbin/"
 cp -a "${PREFIX}/lib/systemd/system/man-db.service" "${PACKAGER_TOPDIR}/lib/systemd/system/"
 cp -a "${PREFIX}/lib/systemd/system/man-db.timer" "${PACKAGER_TOPDIR}/lib/systemd/system/"
@@ -1486,17 +1480,29 @@ if [ ! -f "${PKG_BUILD_SUBDIR}/__package_installed" ]; then
     make install
 
     # strip and verify there are no dependencies for static build
-    finalize_build "${PREFIX}/bin/groff" \
-                   "${PREFIX}/bin/troff" \
-                   "${PREFIX}/bin/grotty" \
-                   "${PREFIX}/bin/pre-grohtml" \
-                   "${PREFIX}/bin/post-grohtml" \
-                   "${PREFIX}/bin/grops" \
-                   "${PREFIX}/bin/grolbp" \
+    finalize_build "${PREFIX}/bin/addftinfo" \
+                   "${PREFIX}/bin/eqn" \
+                   "${PREFIX}/bin/grn" \
                    "${PREFIX}/bin/grodvi" \
+                   "${PREFIX}/bin/groff" \
+                   "${PREFIX}/bin/grolbp" \
                    "${PREFIX}/bin/grolj4" \
+                   "${PREFIX}/bin/grops" \
+                   "${PREFIX}/bin/grotty" \
                    "${PREFIX}/bin/hpftodit" \
-                   "${PREFIX}/bin/addftinfo"
+                   "${PREFIX}/bin/indxbib" \
+                   "${PREFIX}/bin/lkbib" \
+                   "${PREFIX}/bin/lookbib" \
+                   "${PREFIX}/bin/pfbtops" \
+                   "${PREFIX}/bin/pic" \
+                   "${PREFIX}/bin/post-grohtml" \
+                   "${PREFIX}/bin/preconv" \
+                   "${PREFIX}/bin/pre-grohtm" \
+                   "${PREFIX}/bin/refer" \
+                   "${PREFIX}/bin/soelim" \
+                   "${PREFIX}/bin/tbl" \
+                   "${PREFIX}/bin/tfmtodit" \
+                   "${PREFIX}/bin/troff"
 
     touch __package_installed
 fi
