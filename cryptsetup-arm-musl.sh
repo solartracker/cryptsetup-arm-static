@@ -1812,7 +1812,7 @@ if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
     cd "${PKG_SOURCE_SUBDIR}"
 
     $MAKE
-    make install
+    make install LIBRARY_REL=lib
 
     touch __package_installed
 fi
