@@ -1468,7 +1468,7 @@ if [ ! -f "${PKG_BUILD_SUBDIR}/__package_installed" ]; then
 
     export LDFLAGS="-static ${LDFLAGS}"
     export PATH="${HOST_STAGE_DIR}/bin:${PATH}"
-    export GROFF="${HOST_STAGE_DIR}/bin/groff"
+    export GROFF_BIN_PATH="${HOST_STAGE_DIR}/bin/groff"
 
     ../${PKG_SOURCE_SUBDIR}/configure \
         --prefix="${PREFIX}" \
@@ -1478,7 +1478,7 @@ if [ ! -f "${PKG_BUILD_SUBDIR}/__package_installed" ]; then
         --disable-rpath \
     || handle_configure_error $?
 
-    $MAKE
+    $MAKE GROFF_BIN_PATH="${GROFF_BIN_PATH}"
     make install
 
     # strip and verify there are no dependencies for static build
