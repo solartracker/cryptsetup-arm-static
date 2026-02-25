@@ -1434,6 +1434,7 @@ if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
     unpack_archive "${PKG_SOURCE}" "${PKG_SOURCE_SUBDIR}"
     cd "${PKG_SOURCE_SUBDIR}"
 
+    export GROFF_BIN_PATH="$(which groff)"
     export LDFLAGS="-static ${LDFLAGS}"
 
     ./configure \
@@ -1442,6 +1443,7 @@ if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
         --build="${SYSTEM}" \
         --disable-dependency-tracking \
         --disable-rpath \
+        --with-awk="$(which awk)" \
     || handle_configure_error $?
 
     $MAKE
