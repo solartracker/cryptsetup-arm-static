@@ -1415,35 +1415,66 @@ fi
 )
 
 ################################################################################
-# groff-1.23.0
+# groff-1.23.0 (host)
 (
 PKG_NAME=groff
 PKG_VERSION=1.23.0
-PKG_SOURCE="${PKG_NAME}-${PKG_VERSION}.tar.gz"
-PKG_SOURCE_URL="https://ftp.gnu.org/gnu/groff/${PKG_SOURCE}"
 PKG_SOURCE_SUBDIR="${PKG_NAME}-${PKG_VERSION}"
 PKG_HASH="6b9757f592b7518b4902eb6af7e54570bdccba37a871fddb2d30ae3863511c13"
+HOST_STAGE_DIR="${STAGE_DIR}/${SYSTEM}"
+(
+PKG_SOURCE="${PKG_NAME}-${PKG_VERSION}.tar.gz"
+PKG_SOURCE_URL="https://ftp.gnu.org/gnu/groff/${PKG_SOURCE}"
+PKG_BUILD_SUBDIR="${PKG_SOURCE_SUBDIR}-build-host"
 
 mkdir -p "${SRC_ROOT}/${PKG_NAME}"
 cd "${SRC_ROOT}/${PKG_NAME}"
 
-if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
-    rm -rf "${PKG_SOURCE_SUBDIR}"
+if [ ! -f "${PKG_BUILD_SUBDIR}/__package_installed" ]; then
     download_archive "${PKG_SOURCE_URL}" "${PKG_SOURCE}" "."
     verify_hash "${PKG_SOURCE}" "${PKG_HASH}"
     unpack_archive "${PKG_SOURCE}" "${PKG_SOURCE_SUBDIR}"
-    cd "${PKG_SOURCE_SUBDIR}"
 
-    export GROFF_BIN_PATH="$(which groff)"
+    rm -rf "${PKG_BUILD_SUBDIR}"
+    mkdir "${PKG_BUILD_SUBDIR}"
+    cd "${PKG_BUILD_SUBDIR}"
+
+    unset PREFIX HOST CC CXX AR LD RANLIB OBJCOPY STRIP READELF CFLAGS CXXFLAGS LDFLAGS CPPFLAGS PKG_CONFIG PKG_CONFIG_LIBDIR PKG_CONFIG_PATH
+
+    ../${PKG_SOURCE_SUBDIR}/configure \
+        --prefix="${HOST_STAGE_DIR}" \
+        --disable-dependency-tracking \
+        --disable-rpath \
+    || handle_configure_error $?
+
+    $MAKE
+    make install
+
+    touch __package_installed
+fi
+)
+
+################################################################################
+# groff-1.23.0 (target)
+(
+PKG_BUILD_SUBDIR="${PKG_SOURCE_SUBDIR}-build-target"
+
+cd "${SRC_ROOT}/${PKG_NAME}"
+
+if [ ! -f "${PKG_BUILD_SUBDIR}/__package_installed" ]; then
+    rm -rf "${PKG_BUILD_SUBDIR}"
+    mkdir "${PKG_BUILD_SUBDIR}"
+    cd "${PKG_BUILD_SUBDIR}"
+
     export LDFLAGS="-static ${LDFLAGS}"
+    export PATH="${HOST_STAGE_DIR}/bin:${PATH}"
 
-    ./configure \
+    ../${PKG_SOURCE_SUBDIR}/configure \
         --prefix="${PREFIX}" \
         --host="${HOST}" \
         --build="${SYSTEM}" \
         --disable-dependency-tracking \
         --disable-rpath \
-        --with-awk="$(which awk)" \
     || handle_configure_error $?
 
     $MAKE
@@ -1464,7 +1495,8 @@ if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
 
     touch __package_installed
 fi
-)
+) #END groff (target)
+) #END groff (host)
 
 ################################################################################
 # gdbm-1.26
