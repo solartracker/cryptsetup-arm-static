@@ -1468,6 +1468,7 @@ if [ ! -f "${PKG_BUILD_SUBDIR}/__package_installed" ]; then
 
     export LDFLAGS="-static ${LDFLAGS}"
     export PATH="${HOST_STAGE_DIR}/bin:${PATH}"
+    export GROFF="${HOST_STAGE_DIR}/bin/groff"
 
     ../${PKG_SOURCE_SUBDIR}/configure \
         --prefix="${PREFIX}" \
