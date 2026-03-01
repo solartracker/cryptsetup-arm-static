@@ -2,7 +2,10 @@
 ################################################################################
 # install.sh
 #
-# Setup the runtime environment for portable man-db
+# Setup the runtime environment for portable man-db.  This script should be
+# sourced once inside every shell instance before using the man program.  It
+# configures the PATH variable and creates a symbolic link to its own portable
+# sysroot.
 #
 # Copyright (C) 2025 Richard Elwell
 # Licensed under GPLv3 or later
@@ -12,9 +15,11 @@ PKG_ROOT="mandb"
 
 if [ "$(basename -- "$0")" = "$SCRIPTNAME" ]; then
     echo "ERROR: This script must be sourced:"
+    echo ""
     echo "source install.sh"
     echo "    -OR-"
     echo ". install.sh"
+    echo ""
     echo ""
     exit 1
 fi
