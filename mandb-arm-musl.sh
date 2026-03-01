@@ -1627,10 +1627,12 @@ if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
     apply_patches "${SCRIPT_DIR}/patches/man-db/man-db-2.13.1/solartracker" "."
 
     export PREFIX="${PORTABLE_DIR}"
+    export EPREFIX="${PORTABLE_DIR}"
     export LDFLAGS="-static ${LDFLAGS}"
 
     ./configure \
         --prefix="${PREFIX}" \
+        --exec-prefix="${EPREFIX}" \
         --host="${HOST}" \
         --build="${SYSTEM}" \
         --enable-static \
