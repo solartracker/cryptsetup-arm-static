@@ -41,4 +41,3 @@ if ! contains_path "${PORTABLE_DIR}/bin"; then
     export PATH="${PORTABLE_DIR}/bin:${PATH}"
 fi
 
-exit 0
