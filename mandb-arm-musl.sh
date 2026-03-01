@@ -108,6 +108,8 @@ mkdir -p "${PACKAGER_TOPDIR}/libexec"
 mkdir -p "${PACKAGER_TOPDIR}/lib/groff"
 mkdir -p "${PACKAGER_TOPDIR}/lib/systemd/system"
 mkdir -p "${PACKAGER_TOPDIR}/usr/lib/tmpfiles.d"
+# install
+cp -a "${SCRIPT_DIR}/files/man-db/man-db-2.13.1/solartracker/install.sh" "${PACKAGER_TOPDIR}/"
 # manpages
 cp -a "${PREFIX}/share/man" "${PACKAGER_TOPDIR}/share/"
 cp -a "${PREFIX_PORTABLE_DIR}/share/man" "${PACKAGER_TOPDIR}/share/"
