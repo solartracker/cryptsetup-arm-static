@@ -71,6 +71,8 @@ PACKAGER_NAME="${PKG_ROOT}_${PKG_ROOT_VERSION}-${PKG_ROOT_RELEASE}_${PKG_TARGET_
 PACKAGER_ROOT="${CROSSBUILD_DIR}/packager/${PKG_ROOT}/${PACKAGER_NAME}"
 PACKAGER_TOPDIR="${PACKAGER_ROOT}/${PKG_ROOT}-${PKG_ROOT_VERSION}"
 PORTABLE_DIR="/tmp/portable-${PKG_ROOT}"
+SYSROOT_PORTABLE_DIR="${SYSROOT}/tmp/portable-${PKG_ROOT}"
+PREFIX_PORTABLE_DIR="${SYSROOT_PORTABLE_DIR}"
 
 MAKE="make -j$(grep -c ^processor /proc/cpuinfo)" # parallelism
 #MAKE="make -j1"                                  # one job at a time
@@ -108,6 +110,7 @@ mkdir -p "${PACKAGER_TOPDIR}/lib/systemd/system"
 mkdir -p "${PACKAGER_TOPDIR}/usr/lib/tmpfiles.d"
 # manpages
 cp -a "${PREFIX}/share/man" "${PACKAGER_TOPDIR}/share/"
+cp -a "${PREFIX_PORTABLE_DIR}/share/man" "${PACKAGER_TOPDIR}/share/"
 # ncurses
 cp -a "${PREFIX}/bin/captoinfo" "${PACKAGER_TOPDIR}/bin/"
 cp -a "${PREFIX}/bin/clear" "${PACKAGER_TOPDIR}/bin/"
@@ -171,20 +174,20 @@ cp -a "${PREFIX}/bin/gdbm_load" "${PACKAGER_TOPDIR}/bin/"
 cp -a "${PREFIX}/bin/gdbm_dump" "${PACKAGER_TOPDIR}/bin/"
 cp -a "${PREFIX}/share/info" "${PACKAGER_TOPDIR}/share/"
 # man-db
-cp -a "${PREFIX}/etc/man_db.conf" "${PACKAGER_TOPDIR}/etc/"
-cp -a "${PREFIX}/libexec/man-db" "${PACKAGER_TOPDIR}/libexec/"
-cp -a "${PREFIX}/lib/systemd/system/man-db.service" "${PACKAGER_TOPDIR}/lib/systemd/system/"
-cp -a "${PREFIX}/lib/systemd/system/man-db.timer" "${PACKAGER_TOPDIR}/lib/systemd/system/"
-cp -a "${PREFIX}/bin/apropos" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/catman" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/lexgrog" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/man" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/mandb" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/manpath" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/man-recode" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/bin/whatis" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/sbin/accessdb" "${PACKAGER_TOPDIR}/sbin/"
-add_items_to_install_package "${PREFIX}/bin/man"
+cp -a "${PREFIX_PORTABLE_DIR}/etc/man_db.conf" "${PACKAGER_TOPDIR}/etc/"
+cp -a "${PREFIX_PORTABLE_DIR}/libexec/man-db" "${PACKAGER_TOPDIR}/libexec/"
+cp -a "${PREFIX_PORTABLE_DIR}/lib/systemd/system/man-db.service" "${PACKAGER_TOPDIR}/lib/systemd/system/"
+cp -a "${PREFIX_PORTABLE_DIR}/lib/systemd/system/man-db.timer" "${PACKAGER_TOPDIR}/lib/systemd/system/"
+cp -a "${PREFIX_PORTABLE_DIR}/bin/apropos" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX_PORTABLE_DIR}/bin/catman" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX_PORTABLE_DIR}/bin/lexgrog" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX_PORTABLE_DIR}/bin/man" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX_PORTABLE_DIR}/bin/mandb" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX_PORTABLE_DIR}/bin/manpath" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX_PORTABLE_DIR}/bin/man-recode" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX_PORTABLE_DIR}/bin/whatis" "${PACKAGER_TOPDIR}/bin/"
+cp -a "${PREFIX_PORTABLE_DIR}/sbin/accessdb" "${PACKAGER_TOPDIR}/sbin/"
+add_items_to_install_package "${PREFIX_PORTABLE_DIR}/bin/man"
 
 return 0
 } #END create_install_package()
@@ -1644,11 +1647,11 @@ if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
     make install DESTDIR="${SYSROOT}"
 
     # strip and verify there are no dependencies for static build
-    finalize_build "${SYSROOT}/bin/man" \
-                   "${SYSROOT}/bin/man-recode" \
-                   "${SYSROOT}/bin/mandb" \
-                   "${SYSROOT}/bin/manpath" \
-                   "${SYSROOT}/bin/whatis"
+    finalize_build "${SYSROOT_PORTABLE_DIR}/bin/man" \
+                   "${SYSROOT_PORTABLE_DIR}/bin/man-recode" \
+                   "${SYSROOT_PORTABLE_DIR}/bin/mandb" \
+                   "${SYSROOT_PORTABLE_DIR}/bin/manpath" \
+                   "${SYSROOT_PORTABLE_DIR}/bin/whatis"
 
     touch __package_installed
 fi
