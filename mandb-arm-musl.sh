@@ -1633,6 +1633,7 @@ if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
     ./configure \
         --prefix="${PREFIX}" \
         --exec-prefix="${EPREFIX}" \
+        --with-systemdsystemunitdir="${PREFIX}/lib/systemd/system" \
         --host="${HOST}" \
         --build="${SYSTEM}" \
         --enable-static \
