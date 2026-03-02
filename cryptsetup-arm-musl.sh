@@ -1481,7 +1481,6 @@ if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
         --disable-nls \
         --disable-rpath \
         --disable-scripts \
-        --disable-doc \
     || handle_configure_error $?
 
     $MAKE
@@ -1633,7 +1632,7 @@ if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
 
     ./Configure linux-armv4 no-asm \
         enable-zlib enable-zstd no-shared \
-        no-tests no-fuzz-afl no-fuzz-libfuzzer no-gost no-err no-unit-test no-docs \
+        no-tests no-fuzz-afl no-fuzz-libfuzzer no-gost no-err no-unit-test \
         no-err no-async \
         no-aria no-sm2 no-sm3 no-sm4 \
         no-dso no-ssl3 no-comp \
@@ -1847,7 +1846,7 @@ if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
         --disable-dependency-tracking \
         --disable-nls \
         --disable-rpath \
-        --disable-doc --disable-tests \
+        --disable-tests \
         --enable-threads=posix \
     || handle_configure_error $?
 
@@ -1887,7 +1886,6 @@ if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
         --disable-dependency-tracking \
         --disable-nls \
         --disable-rpath \
-        --disable-doc \
     || handle_configure_error $?
 
     $MAKE
