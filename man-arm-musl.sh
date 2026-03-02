@@ -111,8 +111,9 @@ mkdir -p "${PACKAGER_TOPDIR}/usr/lib/tmpfiles.d"
 # install
 cp -a "${SCRIPT_DIR}/files/man-db/man-db-2.13.1/solartracker/install.sh" "${PACKAGER_TOPDIR}/"
 # manpages
-cp -a "${PREFIX}/share/man" "${PACKAGER_TOPDIR}/share/"
-cp -a "${PREFIX_PORTABLE_DIR}/share/man" "${PACKAGER_TOPDIR}/share/"
+cp -a "${PREFIX}/man" "${PACKAGER_TOPDIR}/share/" || true
+cp -a "${PREFIX}/share/man" "${PACKAGER_TOPDIR}/share/" || true
+cp -a "${PREFIX_PORTABLE_DIR}/share/man" "${PACKAGER_TOPDIR}/share/" || true
 #info ncurses
 cp -a "${PREFIX}/share/tabset" "${PACKAGER_TOPDIR}/share/"
 cp -a "${PREFIX}/share/terminfo" "${PACKAGER_TOPDIR}/share/"
