@@ -113,7 +113,9 @@ cp -a "${SCRIPT_DIR}/files/man-db/man-db-2.13.1/solartracker/install.sh" "${PACK
 # manpages
 cp -a "${PREFIX}/share/man" "${PACKAGER_TOPDIR}/share/"
 cp -a "${PREFIX_PORTABLE_DIR}/share/man" "${PACKAGER_TOPDIR}/share/"
-# ncurses
+#info ncurses
+cp -a "${PREFIX}/share/tabset" "${PACKAGER_TOPDIR}/share/"
+cp -a "${PREFIX}/share/terminfo" "${PACKAGER_TOPDIR}/share/"
 cp -a "${PREFIX}/bin/captoinfo" "${PACKAGER_TOPDIR}/bin/"
 cp -a "${PREFIX}/bin/clear" "${PACKAGER_TOPDIR}/bin/"
 cp -a "${PREFIX}/bin/infocmp" "${PACKAGER_TOPDIR}/bin/"
@@ -130,6 +132,8 @@ cp -a "${PREFIX}/bin/less" "${PACKAGER_TOPDIR}/bin/"
 cp -a "${PREFIX}/bin/lessecho" "${PACKAGER_TOPDIR}/bin/"
 cp -a "${PREFIX}/bin/lesskey" "${PACKAGER_TOPDIR}/bin/"
 # groff
+cp -a "${PREFIX}/share/doc" "${PACKAGER_TOPDIR}/share/"
+cp -a "${PREFIX}/share/groff" "${PACKAGER_TOPDIR}/share/"
 cp -a "${PREFIX}/lib/groff" "${PACKAGER_TOPDIR}/lib/"
 cp -a "${PREFIX}/bin/addftinfo" "${PACKAGER_TOPDIR}/bin/"
 cp -a "${PREFIX}/bin/afmtodit" "${PACKAGER_TOPDIR}/bin/"
@@ -171,10 +175,10 @@ cp -a "${PREFIX}/bin/tbl" "${PACKAGER_TOPDIR}/bin/"
 cp -a "${PREFIX}/bin/tfmtodit" "${PACKAGER_TOPDIR}/bin/"
 cp -a "${PREFIX}/bin/troff" "${PACKAGER_TOPDIR}/bin/"
 # gdbm
+cp -a "${PREFIX}/share/info" "${PACKAGER_TOPDIR}/share/"
 cp -a "${PREFIX}/bin/gdbmtool" "${PACKAGER_TOPDIR}/bin/"
 cp -a "${PREFIX}/bin/gdbm_load" "${PACKAGER_TOPDIR}/bin/"
 cp -a "${PREFIX}/bin/gdbm_dump" "${PACKAGER_TOPDIR}/bin/"
-cp -a "${PREFIX}/share/info" "${PACKAGER_TOPDIR}/share/"
 # man-db
 cp -a "${PREFIX_PORTABLE_DIR}/etc/man_db.conf" "${PACKAGER_TOPDIR}/etc/"
 cp -a "${PREFIX_PORTABLE_DIR}/libexec/man-db" "${PACKAGER_TOPDIR}/libexec/"
