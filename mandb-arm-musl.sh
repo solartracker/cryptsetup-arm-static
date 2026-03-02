@@ -1654,6 +1654,7 @@ if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
         --enable-threads=posix \
         --enable-year2038 \
         --disable-manual \
+        --with-pager=less \
     || handle_configure_error $?
 
     $MAKE LDFLAGS="-all-static ${LDFLAGS}"
