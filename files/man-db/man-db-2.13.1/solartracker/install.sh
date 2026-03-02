@@ -11,7 +11,7 @@
 # Licensed under GPLv3 or later
 ################################################################################
 SCRIPTNAME="install.sh"
-PKG_ROOT="mandb"
+PKG_ROOT="man"
 
 if [ "$(basename -- "$0")" = "$SCRIPTNAME" ]; then
     echo "ERROR: This script must be sourced:"
