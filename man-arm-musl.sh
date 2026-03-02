@@ -1,6 +1,6 @@
 #!/bin/bash
 ################################################################################
-# mandb-arm-musl.sh
+# man-arm-musl.sh
 #
 # Copyright (C) 2025 Richard Elwell
 #
@@ -20,7 +20,7 @@
 ################################################################################
 
 main() {
-PKG_ROOT=mandb
+PKG_ROOT=man
 PKG_ROOT_VERSION="2.13.1"
 PKG_ROOT_RELEASE=1
 PKG_TARGET_CPU=armv7
