@@ -1474,14 +1474,17 @@ if [ ! -f "${PKG_BUILD_SUBDIR}/__package_installed" ]; then
     mkdir "${PKG_BUILD_SUBDIR}"
     cd "${PKG_BUILD_SUBDIR}"
 
+    export PREFIX="${PORTABLE_DIR}"
+    export EPREFIX="${PORTABLE_DIR}"
     export LDFLAGS="-static ${LDFLAGS}"
-    export PATH="${HOST_STAGE_DIR}/bin:${PATH}"
     export GROFFBIN="${HOST_STAGE_DIR}/bin/groff"
     export PDFMOMBIN="${HOST_STAGE_DIR}/bin/pdfmom"
     export GROFF_BIN_PATH="${HOST_STAGE_DIR}/bin"
+    export PATH="${HOST_STAGE_DIR}/bin:${PATH}"
 
     ../${PKG_SOURCE_SUBDIR}/configure \
         --prefix="${PREFIX}" \
+        --exec-prefix="${EPREFIX}" \
         --host="${HOST}" \
         --build="${SYSTEM}" \
         --disable-dependency-tracking \
@@ -1491,32 +1494,32 @@ if [ ! -f "${PKG_BUILD_SUBDIR}/__package_installed" ]; then
     $MAKE GROFFBIN="${GROFFBIN}" \
           PDFMOMBIN="${PDFMOMBIN}" \
           GROFF_BIN_PATH="${GROFF_BIN_PATH}"
-    make install
+    make install DESTDIR="${SYSROOT}"
 
     # strip and verify there are no dependencies for static build
-    finalize_build "${PREFIX}/bin/addftinfo" \
-                   "${PREFIX}/bin/eqn" \
-                   "${PREFIX}/bin/grn" \
-                   "${PREFIX}/bin/grodvi" \
-                   "${PREFIX}/bin/groff" \
-                   "${PREFIX}/bin/grolbp" \
-                   "${PREFIX}/bin/grolj4" \
-                   "${PREFIX}/bin/grops" \
-                   "${PREFIX}/bin/grotty" \
-                   "${PREFIX}/bin/hpftodit" \
-                   "${PREFIX}/bin/indxbib" \
-                   "${PREFIX}/bin/lkbib" \
-                   "${PREFIX}/bin/lookbib" \
-                   "${PREFIX}/bin/pfbtops" \
-                   "${PREFIX}/bin/pic" \
-                   "${PREFIX}/bin/post-grohtml" \
-                   "${PREFIX}/bin/preconv" \
-                   "${PREFIX}/bin/pre-grohtml" \
-                   "${PREFIX}/bin/refer" \
-                   "${PREFIX}/bin/soelim" \
-                   "${PREFIX}/bin/tbl" \
-                   "${PREFIX}/bin/tfmtodit" \
-                   "${PREFIX}/bin/troff"
+    finalize_build "${SYSROOT_PORTABLE_DIR}/bin/addftinfo" \
+                   "${SYSROOT_PORTABLE_DIR}/bin/eqn" \
+                   "${SYSROOT_PORTABLE_DIR}/bin/grn" \
+                   "${SYSROOT_PORTABLE_DIR}/bin/grodvi" \
+                   "${SYSROOT_PORTABLE_DIR}/bin/groff" \
+                   "${SYSROOT_PORTABLE_DIR}/bin/grolbp" \
+                   "${SYSROOT_PORTABLE_DIR}/bin/grolj4" \
+                   "${SYSROOT_PORTABLE_DIR}/bin/grops" \
+                   "${SYSROOT_PORTABLE_DIR}/bin/grotty" \
+                   "${SYSROOT_PORTABLE_DIR}/bin/hpftodit" \
+                   "${SYSROOT_PORTABLE_DIR}/bin/indxbib" \
+                   "${SYSROOT_PORTABLE_DIR}/bin/lkbib" \
+                   "${SYSROOT_PORTABLE_DIR}/bin/lookbib" \
+                   "${SYSROOT_PORTABLE_DIR}/bin/pfbtops" \
+                   "${SYSROOT_PORTABLE_DIR}/bin/pic" \
+                   "${SYSROOT_PORTABLE_DIR}/bin/post-grohtml" \
+                   "${SYSROOT_PORTABLE_DIR}/bin/preconv" \
+                   "${SYSROOT_PORTABLE_DIR}/bin/pre-grohtml" \
+                   "${SYSROOT_PORTABLE_DIR}/bin/refer" \
+                   "${SYSROOT_PORTABLE_DIR}/bin/soelim" \
+                   "${SYSROOT_PORTABLE_DIR}/bin/tbl" \
+                   "${SYSROOT_PORTABLE_DIR}/bin/tfmtodit" \
+                   "${SYSROOT_PORTABLE_DIR}/bin/troff"
 
     touch __package_installed
 fi
