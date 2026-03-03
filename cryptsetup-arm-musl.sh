@@ -1900,6 +1900,8 @@ if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
     unpack_archive "${PKG_SOURCE}" "${PKG_SOURCE_SUBDIR}"
     cd "${PKG_SOURCE_SUBDIR}"
 
+    [ -f "${SYSROOT}/lib/libargon2.a" ] && make uninstall
+
     $MAKE
     make install LIBRARY_REL=lib
 
