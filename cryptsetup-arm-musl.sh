@@ -2059,8 +2059,6 @@ if [ ! -f "${PKG_BUILD_SUBDIR}/__package_installed" ]; then
     mkdir "${PKG_BUILD_SUBDIR}"
     cd "${PKG_BUILD_SUBDIR}"
 
-    export LIBS="-ltinfow"
-
     ../${PKG_SOURCE_SUBDIR}/configure \
         --prefix="${PREFIX}" \
         --host="${HOST}" \
