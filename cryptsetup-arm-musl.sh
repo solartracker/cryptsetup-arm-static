@@ -1384,7 +1384,7 @@ if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
 
     ( #BEGIN sub-shell
     cd "${CROSSBUILD_DIR}/bin"
-    [ -f "${PREFIX}/bin/ncursesw6-config" ] && ln -sfn "${PREFIX}/bin/ncursesw6-config" "${TARGET}-ncursesw6-config"
+    [ -f "${PREFIX}/bin/ncursesw6-config" ] && ln -sfn "../${TARGET}/sysroot/bin/ncursesw6-config" "${TARGET}-ncursesw6-config"
 
     # enable backward compatability for linking to non-wide libraries
     cd "${PREFIX}/lib"
