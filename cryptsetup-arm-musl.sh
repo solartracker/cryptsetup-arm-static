@@ -1853,6 +1853,7 @@ if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
         --enable-pkgconfig \
         --enable-write_install \
         --with-default-locking-dir=/tmp/lvm \
+        --with-confdir="${PREFIX}/etc" \
         ac_cv_func_malloc_0_nonnull=yes \
         ac_cv_func_realloc_0_nonnull=yes \
         ac_cv_func_malloc_works=yes \
