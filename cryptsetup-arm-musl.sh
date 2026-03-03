@@ -1382,7 +1382,11 @@ if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
     $MAKE
     make install
 
-    ( # enable backward compatability for linking to non-wide libraries
+    ( #BEGIN sub-shell
+    cd "${PREFIX}/bin"
+    [ -f "ncursesw6-config" ] && ln -sfn "ncursesw6-config" "${TARGET}-ncursesw6-config"
+
+    # enable backward compatability for linking to non-wide libraries
     cd "${PREFIX}/lib"
     for lib in tinfo ncurses panel menu form ncurses++; do
         # Symlink static libraries
