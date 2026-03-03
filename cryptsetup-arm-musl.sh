@@ -1852,8 +1852,6 @@ if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
 
     apply_patches "${SCRIPT_DIR}/patches/lvm2/lvm2-2.03.38/solartracker" "."
 
-    #export PREFIX=
-
     ./configure \
         --prefix="${PREFIX}" \
         --host="${HOST}" \
@@ -1873,7 +1871,6 @@ if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
     || handle_configure_error $?
 
     $MAKE
-    #make install DESTDIR="${SYSROOT}"
     make install
 
     touch __package_installed
