@@ -1347,6 +1347,80 @@ fi
 )
 
 ################################################################################
+# ncurses-6.6
+(
+PKG_NAME=ncurses
+PKG_VERSION=6.6
+PKG_SOURCE="${PKG_NAME}-${PKG_VERSION}.tar.gz"
+PKG_SOURCE_URL="https://ftp.gnu.org/gnu/ncurses/${PKG_SOURCE}"
+PKG_SOURCE_SUBDIR="${PKG_NAME}-${PKG_VERSION}"
+PKG_HASH="355b4cbbed880b0381a04c46617b7656e362585d52e9cf84a67e2009b749ff11"
+
+mkdir -p "${SRC_ROOT}/${PKG_NAME}"
+cd "${SRC_ROOT}/${PKG_NAME}"
+
+if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
+    rm -rf "${PKG_SOURCE_SUBDIR}"
+    download_archive "${PKG_SOURCE_URL}" "${PKG_SOURCE}" "."
+    verify_hash "${PKG_SOURCE}" "${PKG_HASH}"
+    unpack_archive "${PKG_SOURCE}" "${PKG_SOURCE_SUBDIR}"
+    cd "${PKG_SOURCE_SUBDIR}"
+
+    export LDFLAGS="-static ${LDFLAGS}"
+
+    ./configure \
+        --prefix="${PREFIX}" \
+        --host="${HOST}" \
+        --build="${SYSTEM}" \
+        --enable-pc-files \
+        --with-termlib \
+        --with-strip-program="${STRIP}" \
+        --without-tests \
+        --without-ada \
+    || handle_configure_error $?
+
+    $MAKE
+    make install
+
+    ( # enable backward compatability for linking to non-wide libraries
+    cd "${PREFIX}/lib"
+    for lib in tinfo ncurses panel menu form ncurses++; do
+        # Symlink static libraries
+        if [ -f "lib${lib}w.a" ]; then
+            ln -sfn "lib${lib}w.a" "lib${lib}.a"
+        fi
+        if [ -f "lib${lib}w_g.a" ]; then
+            ln -sfn "lib${lib}w_g.a" "lib${lib}_g.a"
+        fi
+        # Symlink shared libraries
+        if [ -f "lib${lib}w.so" ]; then
+            ln -sfn "lib${lib}w.so" "lib${lib}.so"
+        fi
+        # Handle versioned shared libraries, e.g., libncursesw.so.6
+        for ver in lib${lib}w.so.*; do
+            [ -e "$ver" ] || continue
+            basever=$(basename "$ver")               # libncursesw.so.6
+            # Replace "w" in the name to get non-wide symlink
+            nonwname="${basever/lib${lib}w.so/lib${lib}.so}"
+            ln -sfn "$basever" "$nonwname"
+        done
+    done
+    ) #END sub-shell
+
+    # strip and verify there are no dependencies for static build
+    finalize_build "${PREFIX}/bin/tic" \
+                   "${PREFIX}/bin/toe" \
+                   "${PREFIX}/bin/infocmp" \
+                   "${PREFIX}/bin/clear" \
+                   "${PREFIX}/bin/tabs" \
+                   "${PREFIX}/bin/tput" \
+                   "${PREFIX}/bin/tset"
+
+    touch __package_installed
+fi
+)
+
+################################################################################
 # zlib-1.3.1
 (
 PKG_NAME=zlib
