@@ -1850,6 +1850,9 @@ if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
         --disable-shared \
         --disable-dependency-tracking \
         --disable-nls \
+        --enable-pkgconfig \
+        --enable-editline \
+        --enable-write_install \
         --with-default-locking-dir=/tmp/lvm \
         ac_cv_func_malloc_0_nonnull=yes \
         ac_cv_func_realloc_0_nonnull=yes \
