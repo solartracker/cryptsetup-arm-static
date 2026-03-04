@@ -1985,6 +1985,124 @@ fi
 )
 
 ################################################################################
+# nettle-3.10.2
+(
+PKG_NAME=nettle
+#PKG_VERSION=4.0
+PKG_VERSION=3.10.2
+PKG_SOURCE="${PKG_NAME}-${PKG_VERSION}.tar.gz"
+PKG_SOURCE_URL="https://ftp.gnu.org/gnu/${PKG_NAME}/${PKG_SOURCE}"
+PKG_SOURCE_SUBDIR="${PKG_NAME}-${PKG_VERSION}"
+#PKG_HASH="3addbc00da01846b232fb3bc453538ea5468da43033f21bb345cb1e9073f5094"
+PKG_HASH="fe9ff51cb1f2abb5e65a6b8c10a92da0ab5ab6eaf26e7fc2b675c45f1fb519b5"
+
+mkdir -p "${SRC_ROOT}/${PKG_NAME}"
+cd "${SRC_ROOT}/${PKG_NAME}"
+
+if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
+    rm -rf "${PKG_SOURCE_SUBDIR}"
+    download_archive "${PKG_SOURCE_URL}" "${PKG_SOURCE}" "."
+    verify_hash "${PKG_SOURCE}" "${PKG_HASH}"
+    unpack_archive "${PKG_SOURCE}" "${PKG_SOURCE_SUBDIR}"
+    cd "${PKG_SOURCE_SUBDIR}"
+
+    ./configure \
+        --prefix="${PREFIX}" \
+        --host="${HOST}" \
+        --build="${SYSTEM}" \
+        --enable-static \
+        --disable-shared \
+        --disable-assembler \
+        --disable-dependency-tracking \
+    || handle_configure_error $?
+
+    $MAKE
+    make install
+
+    touch __package_installed
+fi
+)
+
+################################################################################
+# mbedtls-3.6.5
+(
+PKG_NAME=mbedtls
+#PKG_VERSION=4.0.0
+PKG_VERSION=3.6.5
+PKG_SOURCE="${PKG_NAME}-${PKG_VERSION}.tar.bz2"
+PKG_SOURCE_URL="https://github.com/Mbed-TLS/mbedtls/releases/download/${PKG_NAME}-${PKG_VERSION}/${PKG_SOURCE}"
+PKG_SOURCE_SUBDIR="${PKG_NAME}-${PKG_VERSION}"
+#PKG_HASH="2f3a47f7b3a541ddef450e4867eeecb7ce2ef7776093f3a11d6d43ead6bf2827"
+PKG_HASH="4a11f1777bb95bf4ad96721cac945a26e04bf19f57d905f241fe77ebeddf46d8"
+
+mkdir -p "${SRC_ROOT}/${PKG_NAME}"
+cd "${SRC_ROOT}/${PKG_NAME}"
+
+if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
+    rm -rf "${PKG_SOURCE_SUBDIR}"
+    download_archive "${PKG_SOURCE_URL}" "${PKG_SOURCE}" "."
+    verify_hash "${PKG_SOURCE}" "${PKG_HASH}"
+    unpack_archive "${PKG_SOURCE}" "${PKG_SOURCE_SUBDIR}"
+    cd "${PKG_SOURCE_SUBDIR}"
+
+    rm -rf build
+    mkdir -p build
+    cd build
+
+    export HOSTCC="gcc"
+
+    cmake .. \
+        -DCMAKE_TOOLCHAIN_FILE=${SRC_ROOT}/arm-musl.toolchain.cmake \
+        -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} \
+        -DCMAKE_VERBOSE_MAKEFILE=${CMAKE_VERBOSE_MAKEFILE} \
+        -DCMAKE_PREFIX_PATH="${PREFIX}" \
+        -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
+        -DUSE_STATIC_MBEDTLS_LIBRARY=ON \
+        -DUSE_STATIC_TF_PSA_CRYPTO_LIBRARY=ON \
+        -DUSE_SHARED_MBEDTLS_LIBRARY=OFF \
+        -DUSE_SHARED_TF_PSA_CRYPTO_LIBRARY=OFF \
+        -DENABLE_TESTING=OFF
+
+    $MAKE
+    make install
+
+    cd ..
+
+    touch __package_installed
+fi
+)
+
+if false; then
+# TODO: must be root to build NSS.
+# host tools required: python3, gyp, ninja, ninja-build
+################################################################################
+# nss-3.121
+(
+PKG_NAME=nss
+PKG_VERSION=3.121
+PKG_SOURCE="${PKG_NAME}-${PKG_VERSION}.tar.gz"
+PKG_SOURCE_URL="https://github.com/nss-dev/nss/archive/NSS_$(echo "${PKG_VERSION}" | tr '.' '_')_RTM.tar.gz"
+PKG_SOURCE_SUBDIR="${PKG_NAME}-${PKG_VERSION}"
+PKG_HASH="b88d4af0f00186d2542c86cf17a2031f6cca6b9fb31cb64a305589ee1ca4fe8b"
+
+mkdir -p "${SRC_ROOT}/${PKG_NAME}"
+cd "${SRC_ROOT}/${PKG_NAME}"
+
+if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
+    rm -rf "${PKG_SOURCE_SUBDIR}"
+    download_archive "${PKG_SOURCE_URL}" "${PKG_SOURCE}" "."
+    verify_hash "${PKG_SOURCE}" "${PKG_HASH}"
+    unpack_archive "${PKG_SOURCE}" "${PKG_SOURCE_SUBDIR}"
+    cd "${PKG_SOURCE_SUBDIR}"
+
+    ./build.sh -o -t arm --disable-tests --system-nspr --gcc
+
+    touch __package_installed
+fi
+)
+fi
+
+################################################################################
 # libssh-0.12.0
 (
 PKG_NAME=libssh
@@ -2020,6 +2138,8 @@ if [ ! -f "${PKG_SOURCE_SUBDIR}/__package_installed" ]; then
         -DWITH_SFTP=ON \
         -DWITH_SERVER=ON \
         -DWITH_GCRYPT=ON \
+        -DWITH_OPENSSL=OFF \
+        -DWITH_MBEDTLS=OFF \
         -DWITH_NACL=ON
 
     $MAKE
@@ -2085,13 +2205,14 @@ fi
 
 ################################################################################
 # cryptsetup-2.8.4
+PKG_VERSION__CRYPTSETUP=2.8.4
 (
 PKG_NAME=cryptsetup
-PKG_VERSION=2.8.4
+PKG_VERSION=${PKG_VERSION__CRYPTSETUP}
 PKG_SOURCE="${PKG_NAME}-${PKG_VERSION}.tar.xz"
 PKG_SOURCE_URL="https://www.kernel.org/pub/linux/utils/cryptsetup/v$(echo "$PKG_VERSION" | cut -d. -f1,2)/${PKG_SOURCE}"
 PKG_SOURCE_SUBDIR="${PKG_NAME}-${PKG_VERSION}"
-PKG_BUILD_SUBDIR="${PKG_SOURCE_SUBDIR}-build-gcrypt"
+PKG_BUILD_SUBDIR="${PKG_SOURCE_SUBDIR}-download"
 PKG_HASH="443e46f8964c9acc780f455afbb8e23aa0e8ed7ec504cfc59e04f406fa1e8a83"
 
 mkdir -p "${SRC_ROOT}/${PKG_NAME}"
@@ -2106,9 +2227,30 @@ if [ ! -f "${PKG_BUILD_SUBDIR}/__package_installed" ]; then
     mkdir "${PKG_BUILD_SUBDIR}"
     cd "${PKG_BUILD_SUBDIR}"
 
+    touch __package_installed
+fi
+)
+
+################################################################################
+# cryptsetup (gcrypt)
+(
+PKG_NAME=cryptsetup
+PKG_VERSION=${PKG_VERSION__CRYPTSETUP}
+PKG_SOURCE_SUBDIR="${PKG_NAME}-${PKG_VERSION}"
+PKG_BUILD_SUBDIR="${PKG_SOURCE_SUBDIR}-build-gcrypt"
+
+mkdir -p "${SRC_ROOT}/${PKG_NAME}"
+cd "${SRC_ROOT}/${PKG_NAME}"
+
+if [ ! -f "${PKG_BUILD_SUBDIR}/__package_installed" ]; then
+    rm -rf "${PKG_BUILD_SUBDIR}"
+    mkdir "${PKG_BUILD_SUBDIR}"
+    cd "${PKG_BUILD_SUBDIR}"
+
     export CPPFLAGS="-I${STAGE_DIR}/include ${CPPFLAGS}"
     export LDFLAGS="-static -L${STAGE_DIR}/lib ${LDFLAGS}"
-    export LIBS="-lgcrypt -lgpg-error -ldevmapper -luuid -largon2 -ljson-c -lblkid -lpopt -lpthread -ldl -lm -largp -lz"
+    export LIBS="-lssh -lgcrypt -lgpg-error -ldevmapper -luuid -largon2 -ljson-c -lblkid -lpopt -lpthread -ldl -lm -largp -lz"
+    #export LIBS="-lssh -lgcrypt -lgpg-error -lssl -lcrypto -ldevmapper -luuid -largon2 -ljson-c -lblkid -lpopt -lpthread -ldl -lm -largp -lz"
 
     ../${PKG_SOURCE_SUBDIR}/configure \
         --prefix="${PREFIX}" \
@@ -2133,7 +2275,224 @@ fi
 )
 
 ################################################################################
-# util-linux-2.41.3 (final)
+# cryptsetup (kernel)
+(
+PKG_NAME=cryptsetup
+PKG_VERSION=${PKG_VERSION__CRYPTSETUP}
+PKG_SOURCE_SUBDIR="${PKG_NAME}-${PKG_VERSION}"
+PKG_BUILD_SUBDIR="${PKG_SOURCE_SUBDIR}-build-kernel"
+
+mkdir -p "${SRC_ROOT}/${PKG_NAME}"
+cd "${SRC_ROOT}/${PKG_NAME}"
+
+if [ ! -f "${PKG_BUILD_SUBDIR}/__package_installed" ]; then
+    rm -rf "${PKG_BUILD_SUBDIR}"
+    mkdir "${PKG_BUILD_SUBDIR}"
+    cd "${PKG_BUILD_SUBDIR}"
+
+    export CPPFLAGS="-I${STAGE_DIR}/include ${CPPFLAGS}"
+    export LDFLAGS="-static -L${STAGE_DIR}/lib ${LDFLAGS}"
+    export LIBS="-lssh -lgcrypt -lgpg-error -ldevmapper -luuid -largon2 -ljson-c -lblkid -lpopt -lpthread -ldl -lm -largp -lz"
+    #export LIBS="-lssh -lssl -lcrypto -ldevmapper -luuid -largon2 -ljson-c -lblkid -lpopt -lpthread -ldl -lm -largp -lz"
+
+    ../${PKG_SOURCE_SUBDIR}/configure \
+        --prefix="${PREFIX}" \
+        --host="${HOST}" \
+        --build="${SYSTEM}" \
+        --enable-static \
+        --disable-shared \
+        --disable-dependency-tracking \
+        --disable-nls \
+        --disable-rpath \
+        --enable-libargon2 \
+        --enable-year2038 \
+        --with-luks2-lock-path=/tmp/cryptsetup \
+        --with-crypto_backend=kernel \
+    || handle_configure_error $?
+
+    $MAKE LDFLAGS="-all-static ${LDFLAGS}"
+    #make install
+
+    touch __package_installed
+fi
+)
+
+################################################################################
+# cryptsetup (openssl)
+(
+PKG_NAME=cryptsetup
+PKG_VERSION=${PKG_VERSION__CRYPTSETUP}
+PKG_SOURCE_SUBDIR="${PKG_NAME}-${PKG_VERSION}"
+PKG_BUILD_SUBDIR="${PKG_SOURCE_SUBDIR}-build-openssl"
+
+mkdir -p "${SRC_ROOT}/${PKG_NAME}"
+cd "${SRC_ROOT}/${PKG_NAME}"
+
+if [ ! -f "${PKG_BUILD_SUBDIR}/__package_installed" ]; then
+    rm -rf "${PKG_BUILD_SUBDIR}"
+    mkdir "${PKG_BUILD_SUBDIR}"
+    cd "${PKG_BUILD_SUBDIR}"
+
+    export CPPFLAGS="-I${STAGE_DIR}/include ${CPPFLAGS}"
+    export LDFLAGS="-static -L${STAGE_DIR}/lib ${LDFLAGS}"
+    export LIBS="-lssl -lcrypto -lssh -lgcrypt -lgpg-error -ldevmapper -luuid -largon2 -ljson-c -lblkid -lpopt -lpthread -ldl -lm -largp -lz"
+    #export LIBS="-lssh -lssl -lcrypto -ldevmapper -luuid -largon2 -ljson-c -lblkid -lpopt -lpthread -ldl -lm -largp -lz"
+
+    ../${PKG_SOURCE_SUBDIR}/configure \
+        --prefix="${PREFIX}" \
+        --host="${HOST}" \
+        --build="${SYSTEM}" \
+        --enable-static \
+        --disable-shared \
+        --disable-dependency-tracking \
+        --disable-nls \
+        --disable-rpath \
+        --enable-libargon2 \
+        --enable-year2038 \
+        --with-luks2-lock-path=/tmp/cryptsetup \
+        --with-crypto_backend=openssl \
+    || handle_configure_error $?
+
+    $MAKE LDFLAGS="-all-static ${LDFLAGS}"
+    #make install
+
+    touch __package_installed
+fi
+)
+
+################################################################################
+# cryptsetup (nettle)
+(
+PKG_NAME=cryptsetup
+PKG_VERSION=${PKG_VERSION__CRYPTSETUP}
+PKG_SOURCE_SUBDIR="${PKG_NAME}-${PKG_VERSION}"
+PKG_BUILD_SUBDIR="${PKG_SOURCE_SUBDIR}-build-nettle"
+
+mkdir -p "${SRC_ROOT}/${PKG_NAME}"
+cd "${SRC_ROOT}/${PKG_NAME}"
+
+if [ ! -f "${PKG_BUILD_SUBDIR}/__package_installed" ]; then
+    rm -rf "${PKG_BUILD_SUBDIR}"
+    mkdir "${PKG_BUILD_SUBDIR}"
+    cd "${PKG_BUILD_SUBDIR}"
+
+    export CPPFLAGS="-I${STAGE_DIR}/include ${CPPFLAGS}"
+    export LDFLAGS="-static -L${STAGE_DIR}/lib ${LDFLAGS}"
+    export LIBS="-lnettle -lssh -lgcrypt -lgpg-error -ldevmapper -luuid -largon2 -ljson-c -lblkid -lpopt -lpthread -ldl -lm -largp -lz"
+    #export LIBS="-lnettle -lssh -lssl -lcrypto -ldevmapper -luuid -largon2 -ljson-c -lblkid -lpopt -lpthread -ldl -lm -largp -lz"
+
+    ../${PKG_SOURCE_SUBDIR}/configure \
+        --prefix="${PREFIX}" \
+        --host="${HOST}" \
+        --build="${SYSTEM}" \
+        --enable-static \
+        --disable-shared \
+        --disable-dependency-tracking \
+        --disable-nls \
+        --disable-rpath \
+        --enable-libargon2 \
+        --enable-year2038 \
+        --with-luks2-lock-path=/tmp/cryptsetup \
+        --with-crypto_backend=nettle \
+    || handle_configure_error $?
+
+    $MAKE LDFLAGS="-all-static ${LDFLAGS}"
+    #make install
+
+    touch __package_installed
+fi
+)
+
+################################################################################
+# cryptsetup (mbedtls)
+(
+PKG_NAME=cryptsetup
+PKG_VERSION=${PKG_VERSION__CRYPTSETUP}
+PKG_SOURCE_SUBDIR="${PKG_NAME}-${PKG_VERSION}"
+PKG_BUILD_SUBDIR="${PKG_SOURCE_SUBDIR}-build-mbedtls"
+
+mkdir -p "${SRC_ROOT}/${PKG_NAME}"
+cd "${SRC_ROOT}/${PKG_NAME}"
+
+if [ ! -f "${PKG_BUILD_SUBDIR}/__package_installed" ]; then
+    rm -rf "${PKG_BUILD_SUBDIR}"
+    mkdir "${PKG_BUILD_SUBDIR}"
+    cd "${PKG_BUILD_SUBDIR}"
+
+    export CPPFLAGS="-I${STAGE_DIR}/include ${CPPFLAGS}"
+    export LDFLAGS="-static -L${STAGE_DIR}/lib ${LDFLAGS}"
+    export LIBS="-lssh -lgcrypt -lgpg-error -ldevmapper -luuid -largon2 -ljson-c -lblkid -lpopt -lpthread -ldl -lm -largp -lz"
+    #export LIBS="-lssh -lssl -lcrypto -ldevmapper -luuid -largon2 -ljson-c -lblkid -lpopt -lpthread -ldl -lm -largp -lz"
+
+    ../${PKG_SOURCE_SUBDIR}/configure \
+        --prefix="${PREFIX}" \
+        --host="${HOST}" \
+        --build="${SYSTEM}" \
+        --enable-static \
+        --disable-shared \
+        --disable-dependency-tracking \
+        --disable-nls \
+        --disable-rpath \
+        --enable-libargon2 \
+        --enable-year2038 \
+        --with-luks2-lock-path=/tmp/cryptsetup \
+        --with-crypto_backend=mbedtls \
+    || handle_configure_error $?
+
+    $MAKE LDFLAGS="-all-static ${LDFLAGS}"
+    #make install
+
+    touch __package_installed
+fi
+)
+
+if false; then
+################################################################################
+# cryptsetup (nss)
+(
+PKG_NAME=cryptsetup
+PKG_VERSION=${PKG_VERSION__CRYPTSETUP}
+PKG_SOURCE_SUBDIR="${PKG_NAME}-${PKG_VERSION}"
+PKG_BUILD_SUBDIR="${PKG_SOURCE_SUBDIR}-build-nss"
+
+mkdir -p "${SRC_ROOT}/${PKG_NAME}"
+cd "${SRC_ROOT}/${PKG_NAME}"
+
+if [ ! -f "${PKG_BUILD_SUBDIR}/__package_installed" ]; then
+    rm -rf "${PKG_BUILD_SUBDIR}"
+    mkdir "${PKG_BUILD_SUBDIR}"
+    cd "${PKG_BUILD_SUBDIR}"
+
+    export CPPFLAGS="-I${STAGE_DIR}/include ${CPPFLAGS}"
+    export LDFLAGS="-static -L${STAGE_DIR}/lib ${LDFLAGS}"
+    export LIBS="-lssh -lgcrypt -lgpg-error -ldevmapper -luuid -largon2 -ljson-c -lblkid -lpopt -lpthread -ldl -lm -largp -lz"
+    #export LIBS="-lssh -lssl -lcrypto -ldevmapper -luuid -largon2 -ljson-c -lblkid -lpopt -lpthread -ldl -lm -largp -lz"
+
+    ../${PKG_SOURCE_SUBDIR}/configure \
+        --prefix="${PREFIX}" \
+        --host="${HOST}" \
+        --build="${SYSTEM}" \
+        --enable-static \
+        --disable-shared \
+        --disable-dependency-tracking \
+        --disable-nls \
+        --disable-rpath \
+        --enable-libargon2 \
+        --enable-year2038 \
+        --with-luks2-lock-path=/tmp/cryptsetup \
+        --with-crypto_backend=nss \
+    || handle_configure_error $?
+
+    $MAKE LDFLAGS="-all-static ${LDFLAGS}"
+    #make install
+
+    touch __package_installed
+fi
+)
+fi
+
+################################################################################
+# util-linux (final)
 (
 PKG_NAME=util-linux
 PKG_VERSION=${PKG_VERSION__UTIL_LINUX}
