@@ -83,6 +83,23 @@ umount /mnt/mydata
 > **Note:** Ensure your kernel has crypto support enabled (`dm-crypt`, AES-XTS, SHA modules, etc.) and manually load any required modules on legacy ARM devices.
 
 ---
+## Cryptsetup 2.8.4 ARM Static Build Backends
+
+| Backend (`--with-crypto_backend=`) | `cryptsetup` Size (bytes) | Notes / Features                                                                 |
+|----------------------------------|--------------------------|-------------------------------------------------------------------------------|
+| **kernel**                        | 1,235,560                | Smallest; AES-XTS (disk encryption) handled by Linux kernel crypto API; hardware acceleration supported; PBKDF/HMAC limited if kernel lacks support; no fallback to userspace. |
+| **nettle**                        | 1,276,544                | Slightly larger; userspace PBKDF, HMAC, and hash operations handled by Nettle; minimal footprint; disk encryption can use kernel if KERNEL_CAPI enabled. |
+| **mbedtls**                        | 1,304,840                | Slightly larger than Nettle; userspace PBKDF/HMAC/hash via mbedTLS; disk encryption can use kernel; minimal footprint. |
+| **gcrypt**                        | 2,386,584                | Much larger; full-featured Libgcrypt provides userspace PBKDF/HMAC/hash/ciphers; disk encryption can use kernel. |
+| **openssl**                        | 3,458,284                | Largest; userspace OpenSSL handles PBKDF/HMAC/hash/ciphers; heavy static binary; disk encryption can use kernel. |
+
+### Notes
+
+- **Kernel backend**: Offloads AES-XTS / AES-CBC encryption to the Linux kernel; fastest, smallest, hardware acceleration supported.  
+- **Userspace backends** (Nettle, mbedTLS, Libgcrypt, OpenSSL): handle PBKDF2, Argon2, HMAC, SHA, and other hashes.  
+- For **minimal static ARM builds** that fully support LUKS1/LUKS2 with Argon2, **Nettle** is the most size-efficient compromise.
+
+---
 
 ## License
 
