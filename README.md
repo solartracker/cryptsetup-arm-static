@@ -83,7 +83,7 @@ umount /mnt/mydata
 > **Note:** Ensure your kernel has crypto support enabled (`dm-crypt`, AES-XTS, SHA modules, etc.) and manually load any required modules on legacy ARM devices.
 
 ---
-## Cryptsetup 2.8.4 ARM Static Build Backends
+## Cryptsetup ARM Static Build Backends
 
 | Backend (`--with-crypto_backend=`) | `cryptsetup` Size (bytes) | Notes / Features                                                                 |
 |----------------------------------|--------------------------|-------------------------------------------------------------------------------|
@@ -92,6 +92,17 @@ umount /mnt/mydata
 | **mbedtls**                        | 1,304,840                | Slightly larger than Nettle; userspace PBKDF/HMAC/hash via mbedTLS; disk encryption can use kernel; minimal footprint. |
 | **gcrypt**                        | 2,386,584                | Much larger; full-featured Libgcrypt provides userspace PBKDF/HMAC/hash/ciphers; disk encryption can use kernel. |
 | **openssl**                        | 3,458,284                | Largest; userspace OpenSSL handles PBKDF/HMAC/hash/ciphers; heavy static binary; disk encryption can use kernel. |
+
+### Dependencies (build versions)
+
+- cryptsetup: 2.8.4  
+- libgcrypt: 1.12.0  
+- OpenSSL: 3.6.0  
+- mbedTLS: 3.6.5  
+- Nettle: 3.10.2  
+- Argon2: 20190702  
+- libssh: 0.12.0  
+- util-linux: 2.41.3
 
 ### Notes
 
