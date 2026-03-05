@@ -107,35 +107,35 @@ mkdir -p "${PACKAGER_TOPDIR}/other/cryptsetup-mbedtls"
 mkdir -p "${PACKAGER_TOPDIR}/other/cryptsetup-nettle"
 mkdir -p "${PACKAGER_TOPDIR}/other/cryptsetup-openssl"
 # default crypto backend: gcrypt
-cp -a "${SRC_ROOT}/${PKG_NAME}/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-gcrypt/cryptsetup" "${PACKAGER_TOPDIR}/sbin/"
-cp -a "${SRC_ROOT}/${PKG_NAME}/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-gcrypt/veritysetup" "${PACKAGER_TOPDIR}/sbin/"
-cp -a "${SRC_ROOT}/${PKG_NAME}/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-gcrypt/integritysetup" "${PACKAGER_TOPDIR}/sbin/"
-cp -a "${SRC_ROOT}/${PKG_NAME}/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-gcrypt/cryptsetup-ssh" "${PACKAGER_TOPDIR}/sbin/"
+cp -a "${SRC_ROOT}/cryptsetup/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-gcrypt/cryptsetup" "${PACKAGER_TOPDIR}/sbin/"
+cp -a "${SRC_ROOT}/cryptsetup/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-gcrypt/veritysetup" "${PACKAGER_TOPDIR}/sbin/"
+cp -a "${SRC_ROOT}/cryptsetup/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-gcrypt/integritysetup" "${PACKAGER_TOPDIR}/sbin/"
+cp -a "${SRC_ROOT}/cryptsetup/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-gcrypt/cryptsetup-ssh" "${PACKAGER_TOPDIR}/sbin/"
 # alternate cryptsetup crypto backend: gcrypt
-cp -a "${SRC_ROOT}/${PKG_NAME}/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-gcrypt/cryptsetup" "${PACKAGER_TOPDIR}/other/cryptsetup-gcrypt/"
-cp -a "${SRC_ROOT}/${PKG_NAME}/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-gcrypt/veritysetup" "${PACKAGER_TOPDIR}/other/cryptsetup-gcrypt/"
-cp -a "${SRC_ROOT}/${PKG_NAME}/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-gcrypt/integritysetup" "${PACKAGER_TOPDIR}/other/cryptsetup-gcrypt/"
-cp -a "${SRC_ROOT}/${PKG_NAME}/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-gcrypt/cryptsetup-ssh" "${PACKAGER_TOPDIR}/other/cryptsetup-gcrypt/"
+cp -a "${SRC_ROOT}/cryptsetup/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-gcrypt/cryptsetup" "${PACKAGER_TOPDIR}/other/cryptsetup-gcrypt/"
+cp -a "${SRC_ROOT}/cryptsetup/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-gcrypt/veritysetup" "${PACKAGER_TOPDIR}/other/cryptsetup-gcrypt/"
+cp -a "${SRC_ROOT}/cryptsetup/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-gcrypt/integritysetup" "${PACKAGER_TOPDIR}/other/cryptsetup-gcrypt/"
+cp -a "${SRC_ROOT}/cryptsetup/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-gcrypt/cryptsetup-ssh" "${PACKAGER_TOPDIR}/other/cryptsetup-gcrypt/"
 # alternate cryptsetup crypto backend: kernel
-cp -a "${SRC_ROOT}/${PKG_NAME}/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-kernel/cryptsetup" "${PACKAGER_TOPDIR}/other/cryptsetup-kernel/"
-cp -a "${SRC_ROOT}/${PKG_NAME}/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-kernel/veritysetup" "${PACKAGER_TOPDIR}/other/cryptsetup-kernel/"
-cp -a "${SRC_ROOT}/${PKG_NAME}/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-kernel/integritysetup" "${PACKAGER_TOPDIR}/other/cryptsetup-kernel/"
-cp -a "${SRC_ROOT}/${PKG_NAME}/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-kernel/cryptsetup-ssh" "${PACKAGER_TOPDIR}/other/cryptsetup-kernel/"
+cp -a "${SRC_ROOT}/cryptsetup/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-kernel/cryptsetup" "${PACKAGER_TOPDIR}/other/cryptsetup-kernel/"
+cp -a "${SRC_ROOT}/cryptsetup/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-kernel/veritysetup" "${PACKAGER_TOPDIR}/other/cryptsetup-kernel/"
+cp -a "${SRC_ROOT}/cryptsetup/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-kernel/integritysetup" "${PACKAGER_TOPDIR}/other/cryptsetup-kernel/"
+cp -a "${SRC_ROOT}/cryptsetup/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-kernel/cryptsetup-ssh" "${PACKAGER_TOPDIR}/other/cryptsetup-kernel/"
 # alternate cryptsetup crypto backend: mbedtls
-cp -a "${SRC_ROOT}/${PKG_NAME}/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-mbedtls/cryptsetup" "${PACKAGER_TOPDIR}/other/cryptsetup-mbedtls/"
-cp -a "${SRC_ROOT}/${PKG_NAME}/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-mbedtls/veritysetup" "${PACKAGER_TOPDIR}/other/cryptsetup-mbedtls/"
-cp -a "${SRC_ROOT}/${PKG_NAME}/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-mbedtls/integritysetup" "${PACKAGER_TOPDIR}/other/cryptsetup-mbedtls/"
-cp -a "${SRC_ROOT}/${PKG_NAME}/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-mbedtls/cryptsetup-ssh" "${PACKAGER_TOPDIR}/other/cryptsetup-mbedtls/"
+cp -a "${SRC_ROOT}/cryptsetup/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-mbedtls/cryptsetup" "${PACKAGER_TOPDIR}/other/cryptsetup-mbedtls/"
+cp -a "${SRC_ROOT}/cryptsetup/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-mbedtls/veritysetup" "${PACKAGER_TOPDIR}/other/cryptsetup-mbedtls/"
+cp -a "${SRC_ROOT}/cryptsetup/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-mbedtls/integritysetup" "${PACKAGER_TOPDIR}/other/cryptsetup-mbedtls/"
+cp -a "${SRC_ROOT}/cryptsetup/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-mbedtls/cryptsetup-ssh" "${PACKAGER_TOPDIR}/other/cryptsetup-mbedtls/"
 # alternate cryptsetup crypto backend: nettle
-cp -a "${SRC_ROOT}/${PKG_NAME}/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-nettle/cryptsetup" "${PACKAGER_TOPDIR}/other/cryptsetup-nettle/"
-cp -a "${SRC_ROOT}/${PKG_NAME}/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-nettle/veritysetup" "${PACKAGER_TOPDIR}/other/cryptsetup-nettle/"
-cp -a "${SRC_ROOT}/${PKG_NAME}/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-nettle/integritysetup" "${PACKAGER_TOPDIR}/other/cryptsetup-nettle/"
-cp -a "${SRC_ROOT}/${PKG_NAME}/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-nettle/cryptsetup-ssh" "${PACKAGER_TOPDIR}/other/cryptsetup-nettle/"
+cp -a "${SRC_ROOT}/cryptsetup/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-nettle/cryptsetup" "${PACKAGER_TOPDIR}/other/cryptsetup-nettle/"
+cp -a "${SRC_ROOT}/cryptsetup/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-nettle/veritysetup" "${PACKAGER_TOPDIR}/other/cryptsetup-nettle/"
+cp -a "${SRC_ROOT}/cryptsetup/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-nettle/integritysetup" "${PACKAGER_TOPDIR}/other/cryptsetup-nettle/"
+cp -a "${SRC_ROOT}/cryptsetup/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-nettle/cryptsetup-ssh" "${PACKAGER_TOPDIR}/other/cryptsetup-nettle/"
 # alternate cryptsetup crypto backend: openssl
-cp -a "${SRC_ROOT}/${PKG_NAME}/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-openssl/cryptsetup" "${PACKAGER_TOPDIR}/other/cryptsetup-openssl/"
-cp -a "${SRC_ROOT}/${PKG_NAME}/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-openssl/veritysetup" "${PACKAGER_TOPDIR}/other/cryptsetup-openssl/"
-cp -a "${SRC_ROOT}/${PKG_NAME}/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-openssl/integritysetup" "${PACKAGER_TOPDIR}/other/cryptsetup-openssl/"
-cp -a "${SRC_ROOT}/${PKG_NAME}/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-openssl/cryptsetup-ssh" "${PACKAGER_TOPDIR}/other/cryptsetup-openssl/"
+cp -a "${SRC_ROOT}/cryptsetup/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-openssl/cryptsetup" "${PACKAGER_TOPDIR}/other/cryptsetup-openssl/"
+cp -a "${SRC_ROOT}/cryptsetup/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-openssl/veritysetup" "${PACKAGER_TOPDIR}/other/cryptsetup-openssl/"
+cp -a "${SRC_ROOT}/cryptsetup/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-openssl/integritysetup" "${PACKAGER_TOPDIR}/other/cryptsetup-openssl/"
+cp -a "${SRC_ROOT}/cryptsetup/cryptsetup-${PKG_VERSION__CRYPTSETUP}-build-openssl/cryptsetup-ssh" "${PACKAGER_TOPDIR}/other/cryptsetup-openssl/"
 add_items_to_install_package "${PREFIX}/sbin/cryptsetup"
 
 return 0
@@ -1273,6 +1273,7 @@ fi
 
 ################################################################################
 download_and_compile() {
+PKG_VERSION__CRYPTSETUP=${PKG_ROOT_VERSION}
 ( #BEGIN sub-shell
 export PATH="${CROSSBUILD_DIR}/bin:${PATH}"
 mkdir -p "${SRC_ROOT}"
@@ -2235,8 +2236,7 @@ fi
 )
 
 ################################################################################
-# cryptsetup-2.8.4
-PKG_VERSION__CRYPTSETUP=2.8.4
+# cryptsetup
 (
 PKG_NAME=cryptsetup
 PKG_VERSION=${PKG_VERSION__CRYPTSETUP}
